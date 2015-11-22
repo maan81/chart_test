@@ -3,9 +3,9 @@
 define('ENTRY',true);
 
 if($_POST){
-    // echo '<pre>';
-    print_r($_POST);
-    // echo '</pre>';
+
+    require('process.php');
+
     die;
 }
 

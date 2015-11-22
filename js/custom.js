@@ -1,7 +1,7 @@
 $(function(){
 
     // $('form').submit(function(e){
-    $('form').validator().on('submit', function (e) {
+    $('#submit_form').validator().on('submit', function (e) {
 
         if(e.isDefaultPrevented()){
             console.log('invalid')
@@ -15,7 +15,30 @@ $(function(){
 
         $.post(post_url,post_data)
             .done(function(data){
-                console.log(data);
+                data = JSON.parse(data)
+                // console.log(data);
+                console.log(data.number)
+
+                var barChartData = {
+                    labels : data.number,
+                    datasets : [
+                        {
+                            fillColor   : "rgba(151,187,205,0.5)",
+                            strokeColor : "rgba(151,187,205,0.8)",
+                            highlightFill : "rgba(151,187,205,0.75)",
+                            highlightStroke : "rgba(151,187,205,1)",
+                            data : data.count
+                        }
+                    ]
+                };
+
+                var ctx = document.getElementById("canvas").getContext("2d");
+
+                $('#result').removeClass('hide');
+                $('#canvas').width($('#result').width());
+
+                new Chart(ctx).Bar(barChartData);
+
             })
             .fail(function(data){
                 console.log('!!!???!!');

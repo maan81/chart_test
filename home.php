@@ -15,32 +15,41 @@
 
 
 <div class="container">
-    <form role="form" class="submit_form" data-toggle="validator" role="form">
+    <form role="form" id="submit_form" data-toggle="validator">
 
         <div class="form-group">
-            <label for='total'>Numbers in Pool</label>
-            <input type='number' name='total' id='total' class='form-control'
+            <label for='numbers_in_pool'>Numbers in Pool</label>
+            <input type='number' name='numbers_in_pool' id='numbers_in_pool' class='form-control'
                     placeholder="Integers, 1 to 100 only" required min='1' max='100'>
         </div>
 
         <div class="form-group">
-            <label for='per_draw'>Drawn Numbers</label>
-            <input type='number' name='per_draw' id='per_draw' class='form-control'
+            <label for='drawn_numbers'>Drawn Numbers</label>
+            <input type='number' name='drawn_numbers' id='drawn_numbers' class='form-control'
                     placeholder="Integers, 1 to 10 only" required min='1' max='10'>
         </div>
 
         <div class="form-group">
-            <label for='repeat_draws'>Number of Draws</label>
-            <input type='number' name='repeat_draws' id='repeat_draws' class='form-control'
+            <label for='number_of_draws'>Number of Draws</label>
+            <input type='number' name='number_of_draws' id='number_of_draws' class='form-control'
                     placeholder="Integers, 1 to 9999 only" required min='1' max='9999'>
         </div>
+
+        <div class="form-group">
+            <label for='output'>Output</label>
+            <input type='number' name='output' id='output' class='form-control'
+                    placeholder="Integers, 1 to 100 only" required min='1' max='100'>
+        </div>
+
 
         <button id='submit' class='btn btn-primary'>Submit</button>
 
     </form>
 
 
-    <div class='result hide'></div>
+    <div id='result' class='hide'>
+        <canvas id='canvas'></canvas>
+    </div>
 </div>
 
 
@@ -57,6 +66,8 @@
 <!-- <script type="text/javascript" 
         src='http://1000hz.github.io/bootstrap-validator/dist/validator.min.js'></script> -->
 
+
+<script type="text/javascript" src='js/Chart.js'></script>
 
 <script type="text/javascript" src="js/custom.js"></script>
 
