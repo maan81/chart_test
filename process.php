@@ -46,19 +46,27 @@
 //---------------------------------
 // serverside validation
 
-    if( !valid($_POST['numbers_in_pool'],1,100) ||
-        !valid($_POST['drawn_numbers'],1,10)    ||
-        !valid($_POST['number_of_draws'],1,9999)||
-        !valid($_POST['output'],1,100)
+    // validate fn
+    function valid($num,$min,$max){
+        if( ($num>=$min) && ($num<=$max) )
+            return true;
+        return false;
+    }
+
+    $numbers_in_pool = (int)$_POST['numbers_in_pool'];
+    $drawn_numbers   = (int)$_POST['drawn_numbers'];
+    $number_of_draws = (int)$_POST['number_of_draws'];
+    $output          = (int)$_POST['output'];
+
+    if( !valid($numbers_in_pool,1,100) ||
+        !valid($drawn_numbers,1,10)    ||
+        !valid($number_of_draws,1,9999)||
+        !valid($output,1,100)
     ){
-        echo 'Invalid Data';
+        echo 'false';
         die;
     }
 
-    $numbers_in_pool = $_POST['numbers_in_pool'];
-    $drawn_numbers   = $_POST['drawn_numbers'];
-    $number_of_draws = $_POST['number_of_draws'];
-    $output          = $_POST['output'];
 //---------------------------------
 
 

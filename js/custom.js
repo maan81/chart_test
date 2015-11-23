@@ -19,8 +19,23 @@ $(function(){
             $canvas.removeData('chart');
         }
 
+        function failure(){
+            console.log('!!!???!!');
+
+            if(typeof($canvas.data('chart')) !== 'undefined' ){
+                $canvas.data('chart').destroy();
+                $canvas.removeData('chart');
+            }
+        }
+
         $.post(post_url,post_data)
             .done(function(data){
+
+                if(data==='false'){
+                    failure();
+                    return false;
+                }
+
                 data = JSON.parse(data)
                 // console.log(data);
                 console.log(data.number)
@@ -59,12 +74,7 @@ $(function(){
 
             })
             .fail(function(data){
-                console.log('!!!???!!');
-
-                if(typeof($canvas.data('chart')) !== 'undefined' ){
-                    $canvas.data('chart').destroy();
-                    $canvas.removeData('chart');
-                }
+                failure();
             });
 
     });
