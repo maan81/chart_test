@@ -10,6 +10,8 @@
             crossorigin="anonymous"> -->
 
     <link rel="stylesheet" type="text/css" href="css/style.css">
+
+    <title>Tasks</title>
 </head>
 <body>
 
@@ -20,25 +22,25 @@
         <div class="form-group">
             <label for='numbers_in_pool'>Numbers in Pool</label>
             <input type='number' name='numbers_in_pool' id='numbers_in_pool' class='form-control'
-                    placeholder="Integers, 1 to 100 only" required min='1' max='100'>
+                    placeholder="Integers, 1 to 100" required min='1' max='100'>
         </div>
 
         <div class="form-group">
             <label for='drawn_numbers'>Drawn Numbers</label>
             <input type='number' name='drawn_numbers' id='drawn_numbers' class='form-control'
-                    placeholder="Integers, 1 to 10 only" required min='1' max='10'>
+                    placeholder="Integers, 1 to 10" required min='1' max='10'>
         </div>
 
         <div class="form-group">
             <label for='number_of_draws'>Number of Draws</label>
             <input type='number' name='number_of_draws' id='number_of_draws' class='form-control'
-                    placeholder="Integers, 1 to 9999 only" required min='1' max='9999'>
+                    placeholder="Integers, 1 to 9999" required min='1' max='9999'>
         </div>
 
         <div class="form-group">
             <label for='output'>Output</label>
             <input type='number' name='output' id='output' class='form-control'
-                    placeholder="Integers, 1 to 100 only" required min='1' max='100'>
+                    placeholder="Integers, 1 to 100" required min='1' max='100'>
         </div>
 
 
@@ -46,8 +48,11 @@
 
     </form>
 
-
     <div id='result' class='hide'>
+        <hr >
+
+        <h4>Results</h4>
+
         <canvas id='canvas'></canvas>
     </div>
 </div>
