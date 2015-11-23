@@ -9,7 +9,7 @@ $(function(){
 
         e.preventDefault();
 
-        var post_url  = 'http://localhost:8080/',
+        var post_url  = window.location.href,/*'http://localhost:8080/',*/
             post_data = $(this).serialize(),
             $canvas   = $('#canvas');
 
