@@ -2,11 +2,12 @@
 
 // print_r($_POST);
 
-// validate
-
-// process
+// validate ...
+// process ...
+// return result
 
 /*
+
     - generate empty main data holder
 
     - repeat for number of draws
@@ -19,17 +20,11 @@
 
             --- repeat for every draw
 
-                ---- extract a random ball from the current set of balls
+                ---- extract a random unused ball from the current set of balls
 
-                ---- push it into a row holder
+                ---- push the ball into the current set of balls
 
-                ---- remove that ball from the current set of balls
-
-
-            --- push the row holder into the data holder
-
-        -- merge data holder into main data holder
-
+            --- push the set of balls into the main data holder
 
 
 
@@ -40,23 +35,37 @@
         -- repeat for each ball
 
             --- count the numbe of times the ball has been used
+                & add 1 to the count
 
-            --- add 1 to the count
+    - sort data according to the times it is drawn
 
-        -- push ball => count into output data
+    - return data
 */
 
+
 //---------------------------------
-// to be validated
+// serverside validation
+
+    if( !valid($_POST['numbers_in_pool'],1,100) ||
+        !valid($_POST['drawn_numbers'],1,10)    ||
+        !valid($_POST['number_of_draws'],1,9999)||
+        !valid($_POST['output'],1,100)
+    ){
+        echo 'Invalid Data';
+        die;
+    }
 
     $numbers_in_pool = $_POST['numbers_in_pool'];
     $drawn_numbers   = $_POST['drawn_numbers'];
     $number_of_draws = $_POST['number_of_draws'];
-    $output          = $_POST['output']; 
+    $output          = $_POST['output'];
 //---------------------------------
 
 
-     // generate empty main data holder
+//---------------------------------
+// process
+
+    // generate empty main data holder
     $main_data_holder = [];
 
     // repeat for number of draws
@@ -67,23 +76,19 @@
         // repeat for every row
         for($j=0;$j<$drawn_numbers;$j++){
 
-            // extract a random ball from the current set of balls
+            // extract a random unused ball from the current set of balls
+            do{
+                $ball = mt_rand(0,$numbers_in_pool);
+            }while(in_array($ball, $row_holder));
 
-            // push it into a row holder
-
-            // remove that ball from the current set of balls
-
-            $row_holder[] = mt_rand(0,$numbers_in_pool);
-
+            // push the ball into a row holder
+            $row_holder[] = $ball;
         }
 
-        // -- merge data holder into main data holder
+        // push row holder into main data holder
         $main_data_holder[] = $row_holder;
 
     }
-
-// print_r($main_data_holder);
-// die;
 
 
     // generate empty output data
@@ -109,47 +114,14 @@
 
     }
 
-// print_r($output_data);
-// die;
-
-
-
-//------------------------------
-// tmp data
-    //     $output_data = [
-    //         1  => 1,
-    //         2  => 1,
-    //         3  => 1,
-    //         8  => 3,
-    //         10 => 1,
-    //         11 => 2,
-    //         12 => 1,
-    //         13 => 4,
-    //         15 => 1,
-    //         21 => 1,
-    //         22 => 1,
-    //         24 => 1,
-    //         25 => 1,
-    //         28 => 1,
-    //         29 => 1,
-    //         31 => 2,
-    //         33 => 1,
-    //         34 => 1,
-    //         35 => 1,
-    //         36 => 1,
-    //         39 => 1,
-    //         42 => 1,
-    //         49 => 1,
-    //     ];
-//------------------------------
-
+    // sort balls according to number of times it is drawn
     arsort($output_data);
-
-    // print_r($output_data);
-
     $output_data = array_slice($output_data, 0, $output,true);
+//---------------------------------
 
-    // print_r($output_data);
+
+//---------------------------------
+// return array of result
 
     echo json_encode(
         [
@@ -157,3 +129,4 @@
             'count' => array_values($output_data)
         ]
     );
+//---------------------------------

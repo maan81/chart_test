@@ -1,6 +1,5 @@
 $(function(){
 
-
     $('#submit_form').validator().on('submit', function (e) {
 
         if(e.isDefaultPrevented()){
